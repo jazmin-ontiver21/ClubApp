@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ClubApp - Editar perfil</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #f5f5f5;
+            font-family: 'Montserrat', sans-serif;
+            color: #111111;
+        }
+
+        .contenedor {
+            width: 100%;
+            max-width: 650px;
+            margin: auto;
+            padding: 40px 25px;
+        }
+
+        .volver {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #ff7900;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .volver:hover {
+            text-decoration: underline;
+        }
+
+        .tarjeta {
+            background: white;
+            border-radius: 22px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        .subtitulo {
+            margin: 8px 0 30px;
+            color: #777777;
+            font-size: 14px;
+        }
+
+        .linea {
+            width: 50px;
+            height: 4px;
+            background: #ff7900;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .campo {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        input {
+            width: 100%;
+            height: 48px;
+            padding: 0 15px;
+            border: 1px solid #dddddd;
+            border-radius: 10px;
+            background: #f8f8f8;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #ff7900;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 121, 0, 0.12);
+        }
+
+        .boton {
+            width: 100%;
+            height: 50px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 10px;
+            background: #ff7900;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .boton:hover {
+            background: #e66d00;
+        }
+
+        .cancelar {
+            display: block;
+            width: 100%;
+            height: 50px;
+            margin-top: 12px;
+            border-radius: 10px;
+            background: #111111;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            line-height: 50px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .cancelar:hover {
+            background: #333333;
+        }
+
+        .error {
+            margin-bottom: 20px;
+            padding: 13px;
+            border-left: 4px solid #ff7900;
+            border-radius: 8px;
+            background: #fff1e6;
+            color: #333333;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+
+            .contenedor {
+                padding: 25px 15px;
+            }
+
+            .tarjeta {
+                padding: 28px 20px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <a href="/mi-perfil/" class="volver">
+            ← Volver a mi perfil
+        </a>
+
+        <div class="tarjeta">
+
+            <h1>
+                Editar perfil
+            </h1>
+
+            <p class="subtitulo">
+                Modificá tus datos personales.
+            </p>
+
+            <div class="linea"></div>
+
+
+            {% if error %}
+
+                <div class="error">
+                    {{ error }}
+                </div>
+
+            {% endif %}
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <div class="campo">
+
+                    <label for="nombre">
+                        NOMBRE
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nombre"
+                        name="nombre"
+                        value="{{ usuario.nombre }}"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="apellido">
+                        APELLIDO
+                    </label>
+
+                    <input
+                        type="text"
+                        id="apellido"
+                        name="apellido"
+                        value="{{ usuario.apellido }}"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="dni">
+                        DNI
+                    </label>
+
+                    <input
+                        type="text"
+                        id="dni"
+                        name="dni"
+                        value="{{ usuario.dni }}"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="fecha_nacimiento">
+                        FECHA DE NACIMIENTO
+                    </label>
+
+                    <input
+                        type="date"
+                        id="fecha_nacimiento"
+                        name="fecha_nacimiento"
+                        value="{{ usuario.fecha_nacimiento|date:'Y-m-d' }}"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="boton"
+                >
+                    GUARDAR CAMBIOS
+                </button>
+
+
+                <a
+                    href="/mi-perfil/"
+                    class="cancelar"
+                >
+                    CANCELAR
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

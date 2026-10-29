@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ClubApp - Administrador</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f5f5f5;
+            color: #111111;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: #111111;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #ff7900;
+        }
+
+        .admin-text {
+            font-size: 13px;
+            color: #dddddd;
+            margin-top: 3px;
+        }
+
+        .cerrar {
+            text-decoration: none;
+            color: white;
+            border: 1px solid #555555;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .cerrar:hover {
+            background: #ff7900;
+            border-color: #ff7900;
+        }
+
+        /* =========================
+           CONTENEDOR
+        ========================= */
+
+        .contenedor {
+            width: 86%;
+            max-width: 1200px;
+            margin: 45px auto;
+        }
+
+        .bienvenida {
+            margin-bottom: 35px;
+        }
+
+        .bienvenida h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .bienvenida h1 span {
+            color: #ff7900;
+        }
+
+        .bienvenida p {
+            color: #666666;
+            font-size: 15px;
+        }
+
+        /* =========================
+           TARJETAS
+        ========================= */
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .tarjeta {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            min-height: 190px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+            border: 1px solid #eeeeee;
+            transition: 0.25s;
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.11);
+        }
+
+        .icono {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: #fff0e3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+            margin-bottom: 18px;
+        }
+
+        .tarjeta h2 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .tarjeta p {
+            color: #777777;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .boton {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 10px 15px;
+            background: #ff7900;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .boton:hover {
+            background: #e66d00;
+        }
+
+        /* =========================
+           INFORMACIÓN
+        ========================= */
+
+        .informacion {
+            margin-top: 35px;
+            background: #111111;
+            color: white;
+            padding: 28px;
+            border-radius: 16px;
+        }
+
+        .informacion h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .informacion p {
+            color: #cccccc;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 16px 5%;
+            }
+
+            .contenedor {
+                width: 90%;
+                margin: 30px auto;
+            }
+
+            .bienvenida h1 {
+                font-size: 25px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cerrar {
+                padding: 8px 11px;
+                font-size: 11px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header>
+
+        <div>
+
+            <div class="logo">
+                Club<span>App</span>
+            </div>
+
+            <div class="admin-text">
+                Panel de administrador
+            </div>
+
+        </div>
+
+        <a
+            href="{% url 'cerrar_sesion' %}"
+            class="cerrar"
+        >
+            Cerrar sesión
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         CONTENIDO
+    ========================= -->
+
+    <main class="contenedor">
+
+        <section class="bienvenida">
+
+            <h1>
+                Bienvenido,
+                <span>{{ usuario.nombre }}</span> 👋
+            </h1>
+
+            <p>
+                Desde este panel podés gestionar y organizar
+                las diferentes áreas del club.
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             OPCIONES
+        ========================= -->
+
+        <section class="grid">
+
+
+            <!-- USUARIOS -->
+
+            <div class="tarjeta">
+
+                <div class="icono">
+                    👥
+                </div>
+
+                <h2>
+                    Usuarios
+                </h2>
+
+                <p>
+                    Administrá jugadores, entrenadores
+                    y demás usuarios registrados.
+                </p>
+
+                <a
+                    href="/admin/clubapp/usuario/"
+                    class="boton"
+                >
+                    Gestionar usuarios
+                </a>
+
+            </div>
+
+
+            <!-- EQUIPOS -->
+
+            <div class="tarjeta">
+
+                <div class="icono">
+                    ⚽
+                </div>
+
+                <h2>
+                    Equipos
+                </h2>
+
+                <p>
+                    Creá equipos, asigná entrenadores
+                    y agregá jugadores.
+                </p>
+
+                <a
+                    href="/admin/clubapp/equipo/"
+                    class="boton"
+                >
+                    Gestionar equipos
+                </a>
+
+            </div>
+
+
+            <!-- TORNEOS -->
+
+            <div class="tarjeta">
+
+                <div class="icono">
+                    🏆
+                </div>
+
+                <h2>
+                    Torneos
+                </h2>
+
+                <p>
+                    Creá y administrá los torneos
+                    del club.
+                </p>
+
+                <a
+                    href="/admin/clubapp/torneo/"
+                    class="boton"
+                >
+                    Gestionar torneos
+                </a>
+
+            </div>
+
+
+            <!-- CALENDARIO / EVENTOS -->
+
+            <div class="tarjeta">
+
+                <div class="icono">
+                    📅
+                </div>
+
+                <h2>
+                    Calendario
+                </h2>
+
+                <p>
+                    Creá y modificá entrenamientos,
+                    partidos y eventos.
+                </p>
+
+                <a
+                    href="/admin/clubapp/evento/"
+                    class="boton"
+                >
+                    Gestionar eventos
+                </a>
+
+            </div>
+
+
+            <!-- NOTIFICACIONES -->
+
+            <div class="tarjeta">
+
+                <div class="icono">
+                    🔔
+                </div>
+
+                <h2>
+                    Notificaciones
+                </h2>
+
+                <p>
+                    Creá y modificá los avisos
+                    importantes del club.
+                </p>
+
+                <a
+                    href="/admin/clubapp/notificacion/"
+                    class="boton"
+                >
+                    Gestionar notificaciones
+                </a>
+
+            </div>
+
+
+            <!-- RESULTADOS -->
+
+            <div class="tarjeta">
+
+                <div class="icono">
+                    🏅
+                </div>
+
+                <h2>
+                    Resultados
+                </h2>
+
+                <p>
+                    Cargá y modificá los resultados
+                    de los partidos.
+                </p>
+
+                <a
+                    href="/admin/clubapp/resultado/"
+                    class="boton"
+                >
+                    Gestionar resultados
+                </a>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =========================
+             INFORMACIÓN
+        ========================= -->
+
+        <section class="informacion">
+
+            <h2>
+                Administración del club
+            </h2>
+
+            <p>
+                Este panel centraliza las principales herramientas
+                de gestión de ClubApp. Desde acá podés administrar
+                usuarios, equipos, torneos, eventos, notificaciones
+                y resultados del club.
+            </p>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

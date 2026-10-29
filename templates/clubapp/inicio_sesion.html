@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión - ClubApp</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #eeeeee;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #111;
+        }
+
+        .contenedor {
+            width: 100%;
+            max-width: 450px;
+            background: white;
+            padding: 35px 30px;
+            border-radius: 22px;
+            box-shadow: 0 10px 35px #00000012;
+        }
+
+        .logo {
+            width: 65px;
+            height: 65px;
+            background: #ff6b00;
+            color: white;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 29px;
+            margin-bottom: 8px;
+        }
+
+        .subtitulo {
+            text-align: center;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .campo {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #ff6b00;
+        }
+
+        .error {
+            background: #ffe9e9;
+            color: #b00020;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            font-size: 14px;
+        }
+
+        .boton {
+            width: 100%;
+            padding: 15px;
+            margin-top: 8px;
+            background: #ff6b00;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .boton:hover {
+            background: #e85f00;
+        }
+
+        .enlace {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #555;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .enlace:hover {
+            color: #ff6b00;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="contenedor">
+        <div class="logo">C</div>
+
+        <h1>Iniciar sesión</h1>
+
+        <p class="subtitulo">
+            Ingreso como {{ rol|title }}
+        </p>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="campo">
+                <label for="nombre">Nombre</label>
+                <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    required
+                    value="{{ request.POST.nombre|default:'' }}"
+                >
+            </div>
+
+            <div class="campo">
+                <label for="apellido">Apellido</label>
+                <input
+                    type="text"
+                    id="apellido"
+                    name="apellido"
+                    required
+                    value="{{ request.POST.apellido|default:'' }}"
+                >
+            </div>
+
+            <div class="campo">
+                <label for="dni">DNI</label>
+                <input
+                    type="text"
+                    id="dni"
+                    name="dni"
+                    required
+                    value="{{ request.POST.dni|default:'' }}"
+                >
+            </div>
+
+            {% if rol == 'administrador' %}
+                <div class="campo">
+                    <label for="clave_administrador">
+                        Contraseña de administrador
+                    </label>
+                    <input
+                        type="password"
+                        id="clave_administrador"
+                        name="clave_administrador"
+                        required
+                        placeholder="Ingresá la contraseña"
+                    >
+                </div>
+            {% endif %}
+
+            <button type="submit" class="boton">
+                Ingresar
+            </button>
+        </form>
+
+        <a href="{% url 'elegir_acceso' rol %}" class="enlace">
+            Volver
+        </a>
+
+        <a href="{% url 'seleccionar_perfil' %}" class="enlace">
+            Cambiar perfil
+        </a>
+    </main>
+</body>
+</html>

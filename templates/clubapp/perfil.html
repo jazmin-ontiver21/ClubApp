@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar perfil - ClubApp</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 15px;
+        }
+
+        .contenedor {
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .logo {
+            color: #ff6b00;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 35px;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .descripcion {
+            color: #aaa;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+
+        .perfiles {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .perfil {
+            background: #1c1c1c;
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 35px 20px;
+            text-decoration: none;
+            color: white;
+            transition: .3s;
+        }
+
+        .perfil:hover {
+            transform: translateY(-5px);
+            border-color: #ff6b00;
+            box-shadow: 0 10px 30px #ff6b0026;
+        }
+
+        .icono {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .perfil h2 {
+            margin-bottom: 10px;
+        }
+
+        .perfil p {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .volver {
+            display: inline-block;
+            margin-top: 30px;
+            color: #ff6b00;
+            text-decoration: none;
+        }
+
+        @media (max-width: 700px) {
+            .perfiles {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="contenedor">
+        <div class="logo">ClubApp</div>
+
+        <h1>¿Cómo vas a ingresar?</h1>
+
+        <p class="descripcion">
+            Seleccioná tu perfil para continuar.
+        </p>
+
+        <div class="perfiles">
+            <a href="{% url 'elegir_acceso' 'jugador' %}" class="perfil">
+                <div class="icono">⚽</div>
+                <h2>Jugador</h2>
+                <p>Consultá entrenamientos, partidos, torneos y resultados.</p>
+            </a>
+
+            <a href="{% url 'elegir_acceso' 'entrenador' %}" class="perfil">
+                <div class="icono">🏅</div>
+                <h2>Entrenador</h2>
+                <p>Gestioná equipos, entrenamientos y jugadores.</p>
+            </a>
+
+            <a href="{% url 'elegir_acceso' 'administrador' %}" class="perfil">
+                <div class="icono">⚙️</div>
+                <h2>Administrador</h2>
+                <p>Administrá usuarios, eventos, torneos y comunicados.</p>
+            </a>
+        </div>
+
+        <a href="{% url 'inicio' %}" class="volver">← Volver al inicio</a>
+    </main>
+</body>
+</html>

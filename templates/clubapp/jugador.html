@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ClubApp - Jugador</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            color: #111;
+        }
+
+        /* ENCABEZADO */
+
+        header {
+            background: #111;
+            color: white;
+            padding: 20px;
+        }
+
+        .barra {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #ff6b00;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .rol {
+            background: #ff6b00;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+
+        /* CONTENIDO */
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .bienvenida {
+            margin-bottom: 30px;
+        }
+
+        .bienvenida h1 {
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .subtitulo {
+            color: #666;
+            font-size: 17px;
+        }
+
+
+        /* BUSCADOR */
+
+        .buscador {
+            width: 100%;
+            padding: 16px 20px;
+            border: none;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            font-size: 16px;
+            box-shadow: 0 3px 12px #ddd;
+            outline: none;
+        }
+
+        .buscador:focus {
+            box-shadow: 0 0 0 2px #ff6b00;
+        }
+
+
+        /* TARJETAS */
+
+        .opciones {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .tarjeta {
+            display: block;
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 3px 12px #ddd;
+            transition: 0.3s;
+            text-decoration: none;
+            color: #111;
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px #ccc;
+        }
+
+        .icono {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .tarjeta h2 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .tarjeta p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+
+        /* NAVEGACIÓN */
+
+        .navegacion {
+            margin-top: 40px;
+            background: #111;
+            border-radius: 18px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .navegacion a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .navegacion a:hover {
+            background: #ff6b00;
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 800px) {
+
+            .opciones {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 550px) {
+
+            .opciones {
+                grid-template-columns: 1fr;
+            }
+
+            .barra {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .bienvenida h1 {
+                font-size: 26px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ENCABEZADO -->
+
+    <header>
+
+        <div class="barra">
+
+            <div class="logo">
+                ClubApp
+            </div>
+
+            <div class="rol">
+                ⚽ Jugador
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- CONTENIDO PRINCIPAL -->
+
+    <main>
+
+
+        <!-- BIENVENIDA -->
+
+        <section class="bienvenida">
+
+            <h1>
+                ¡Bienvenido a ClubApp!
+            </h1>
+
+            <p class="subtitulo">
+                Todo lo que necesitás de tu club, en un solo lugar.
+            </p>
+
+        </section>
+
+
+
+        <!-- BUSCADOR -->
+
+        <input
+            type="text"
+            class="buscador"
+            placeholder="🔎 Buscar torneos, eventos, equipos..."
+        >
+
+
+
+        <!-- OPCIONES -->
+
+        <section class="opciones">
+
+
+            <!-- TORNEOS -->
+
+            <a
+                href="/torneos/"
+                class="tarjeta"
+            >
+
+                <div class="icono">
+                    🏆
+                </div>
+
+                <h2>
+                    Torneos
+                </h2>
+
+                <p>
+                    Consultá los torneos disponibles,
+                    reglamentos e inscripciones.
+                </p>
+
+            </a>
+
+
+
+            <!-- CALENDARIO -->
+
+            <a
+                href="/calendario/"
+                class="tarjeta"
+            >
+
+                <div class="icono">
+                    📅
+                </div>
+
+                <h2>
+                    Calendario
+                </h2>
+
+                <p>
+                    Revisá entrenamientos,
+                    partidos y actividades.
+                </p>
+
+            </a>
+
+
+
+            <!-- NOTIFICACIONES -->
+
+            <a
+                href="/notificaciones/"
+                class="tarjeta"
+            >
+
+                <div class="icono">
+                    🔔
+                </div>
+
+                <h2>
+                    Notificaciones
+                </h2>
+
+                <p>
+                    Consultá las novedades
+                    y avisos importantes del club.
+                </p>
+
+            </a>
+
+
+
+            <!-- RESULTADOS -->
+
+            <a
+                href="/resultados/"
+                class="tarjeta"
+            >
+
+                <div class="icono">
+                    🏅
+                </div>
+
+                <h2>
+                    Resultados
+                </h2>
+
+                <p>
+                    Consultá los últimos resultados
+                    de tu equipo.
+                </p>
+
+            </a>
+
+
+
+            <!-- CHAT -->
+
+            <a
+                href="/chat/"
+                class="tarjeta"
+            >
+
+                <div class="icono">
+                    💬
+                </div>
+
+                <h2>
+                    Chat
+                </h2>
+
+                <p>
+                    Comunicate con entrenadores
+                    y compañeros.
+                </p>
+
+            </a>
+
+<!-- EQUIPOS -->
+
+<a
+    href="/equipos/"
+    class="tarjeta"
+>
+
+    <div class="icono">
+        👥
+    </div>
+
+    <h2>
+        Equipos
+    </h2>
+
+    <p>
+        Consultá los equipos,
+        categorías y entrenadores.
+    </p>
+
+</a>
+
+            <!-- PERFIL -->
+
+            <a
+                href="/mi-perfil/"
+                class="tarjeta"
+            >
+
+                <div class="icono">
+                    👤
+                </div>
+
+                <h2>
+                    Mi perfil
+                </h2>
+
+                <p>
+                    Consultá y modificá
+                    tu información personal.
+                </p>
+
+            </a>
+
+
+        </section>
+
+
+
+        <!-- NAVEGACIÓN INFERIOR -->
+
+        <nav class="navegacion">
+
+
+            <a href="/jugador/">
+                🏠 Inicio
+            </a>
+
+
+            <a href="/torneos/">
+                🏆 Torneos
+            </a>
+
+
+            <a href="/calendario/">
+                📅 Calendario
+            </a>
+
+
+            <a href="/notificaciones/">
+                🔔 Notificaciones
+            </a>
+
+            <a href="/chat/">
+                💬 Chat
+            </a>
+
+            <a href="/mi-perfil/">
+                👤 Perfil
+            </a>
+
+
+        </nav>
+
+
+    </main>
+
+
+</body>
+</html>

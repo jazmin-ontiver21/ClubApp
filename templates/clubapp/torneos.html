@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ClubApp - Torneos</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            color: #111;
+        }
+
+        /* ENCABEZADO */
+
+        header {
+            background: #111;
+            color: white;
+            padding: 20px;
+        }
+
+        .barra {
+            max-width: 1100px;
+            margin: auto;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #ff6b00;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .volver {
+            color: white;
+            text-decoration: none;
+
+            padding: 10px 18px;
+
+            border-radius: 10px;
+
+            background: #ff6b00;
+
+            transition: 0.3s;
+        }
+
+        .volver:hover {
+            background: #ff812b;
+        }
+
+
+        /* CONTENIDO */
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+
+            padding: 0 20px;
+        }
+
+        .titulo {
+            margin-bottom: 30px;
+        }
+
+        .titulo h1 {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .titulo p {
+            color: #666;
+        }
+
+
+        /* TORNEOS */
+
+        .torneos {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+
+        .torneo {
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            box-shadow: 0 3px 12px #ddd;
+
+            transition: 0.3s;
+        }
+
+        .torneo:hover {
+            transform: translateY(-5px);
+
+            box-shadow: 0 8px 20px #ccc;
+        }
+
+
+        .icono {
+            font-size: 40px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .torneo h2 {
+            margin-bottom: 12px;
+        }
+
+
+        .deporte {
+            color: #ff6b00;
+
+            font-weight: bold;
+
+            margin-bottom: 12px;
+        }
+
+
+        .informacion {
+            color: #666;
+
+            line-height: 1.7;
+
+            margin-bottom: 20px;
+        }
+
+
+        .boton {
+            display: inline-block;
+
+            background: #ff6b00;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 10px 18px;
+
+            border-radius: 10px;
+
+            font-weight: bold;
+        }
+
+
+        /* CUANDO NO HAY TORNEOS */
+
+        .sin-torneos {
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            color: #666;
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 800px) {
+
+            .torneos {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 550px) {
+
+            .barra {
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            .torneos {
+                grid-template-columns: 1fr;
+            }
+
+            .titulo h1 {
+                font-size: 28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ENCABEZADO -->
+
+    <header>
+
+        <div class="barra">
+
+            <div class="logo">
+                ClubApp
+            </div>
+
+            <a href="/jugador/" class="volver">
+                ← Volver
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTENIDO -->
+
+    <main>
+
+        <section class="titulo">
+
+            <h1>🏆 Torneos</h1>
+
+            <p>
+                Consultá los torneos disponibles en el club.
+            </p>
+
+        </section>
+
+
+        <!-- LISTA DE TORNEOS -->
+
+        {% if torneos %}
+
+            <section class="torneos">
+
+                {% for torneo in torneos %}
+
+                    <article class="torneo">
+
+                        <div class="icono">
+                            🏆
+                        </div>
+
+                        <h2>
+                            {{ torneo.nombre }}
+                        </h2>
+
+                        <div class="deporte">
+                            {{ torneo.deporte }}
+                        </div>
+
+                        <div class="informacion">
+
+                            <p>
+                                📅 Inicio:
+                                {{ torneo.fecha_inicio }}
+                            </p>
+
+                            <p>
+                                📅 Finalización:
+                                {{ torneo.fecha_fin }}
+                            </p>
+
+                            <p>
+                                {{ torneo.descripcion }}
+                            </p>
+
+                        </div>
+
+                        <a href="#" class="boton">
+                            Ver torneo
+                        </a>
+
+                    </article>
+
+                {% endfor %}
+
+            </section>
+
+        {% else %}
+
+            <div class="sin-torneos">
+
+                <h2>
+                    No hay torneos disponibles
+                </h2>
+
+                <p>
+                    Todavía no se han creado torneos en ClubApp.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+
+    </main>
+
+
+</body>
+
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ClubApp - Notificaciones</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            color: #111;
+        }
+
+        /* ENCABEZADO */
+
+        header {
+            background: #111;
+            color: white;
+            padding: 20px;
+        }
+
+        .barra {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #ff6b00;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .titulo-header {
+            font-weight: bold;
+        }
+
+
+        /* CONTENIDO */
+
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .titulo {
+            margin-bottom: 30px;
+        }
+
+        .titulo h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .titulo p {
+            color: #666;
+            font-size: 17px;
+        }
+
+
+        /* NOTIFICACIONES */
+
+        .lista {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .notificacion {
+            background: white;
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 3px 12px #ddd;
+            border-left: 5px solid #ff6b00;
+        }
+
+        .notificacion h2 {
+            font-size: 19px;
+            margin-bottom: 8px;
+        }
+
+        .notificacion p {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .fecha {
+            color: #999;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+
+        /* SIN NOTIFICACIONES */
+
+        .sin-notificaciones {
+            background: white;
+            padding: 50px 30px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 3px 12px #ddd;
+        }
+
+        .sin-notificaciones .icono {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .sin-notificaciones h2 {
+            margin-bottom: 10px;
+        }
+
+        .sin-notificaciones p {
+            color: #777;
+        }
+
+
+        /* BOTÓN */
+
+        .volver {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 13px 22px;
+            background: #111;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .volver:hover {
+            background: #ff6b00;
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 600px) {
+
+            .barra {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .titulo h1 {
+                font-size: 27px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ENCABEZADO -->
+
+    <header>
+
+        <div class="barra">
+
+            <div class="logo">
+                ClubApp
+            </div>
+
+            <div class="titulo-header">
+                🔔 Notificaciones
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTENIDO -->
+
+    <main>
+
+
+        <section class="titulo">
+
+            <h1>
+                Notificaciones
+            </h1>
+
+            <p>
+                Consultá las novedades y avisos importantes del club.
+            </p>
+
+        </section>
+
+
+        {% if notificaciones %}
+
+            <section class="lista">
+
+                {% for notificacion in notificaciones %}
+
+                    <article class="notificacion">
+
+                        <h2>
+                            🔔 {{ notificacion.titulo }}
+                        </h2>
+
+                        <p>
+                            {{ notificacion.mensaje }}
+                        </p>
+
+                        <div class="fecha">
+                            {{ notificacion.fecha|date:"d/m/Y H:i" }}
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </section>
+
+        {% else %}
+
+            <section class="sin-notificaciones">
+
+                <div class="icono">
+                    🔔
+                </div>
+
+                <h2>
+                    No tenés notificaciones
+                </h2>
+
+                <p>
+                    Cuando haya novedades del club,
+                    aparecerán acá.
+                </p>
+
+            </section>
+
+        {% endif %}
+
+
+        <a
+            href="/jugador/"
+            class="volver"
+        >
+            ← Volver al inicio
+        </a>
+
+
+    </main>
+
+
+</body>
+
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ClubApp - Calendario</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            color: #111;
+        }
+
+        /* ENCABEZADO */
+
+        header {
+            background: #111;
+            color: white;
+            padding: 20px;
+        }
+
+        .barra {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #ff6b00;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .titulo-header {
+            font-weight: bold;
+        }
+
+
+        /* CONTENIDO */
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .titulo {
+            margin-bottom: 30px;
+        }
+
+        .titulo h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .titulo p {
+            color: #666;
+            font-size: 17px;
+        }
+
+
+        /* EVENTOS */
+
+        .eventos {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .evento {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 3px 12px #ddd;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .fecha {
+            min-width: 90px;
+            height: 90px;
+            background: #ff6b00;
+            color: white;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .fecha .dia {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .fecha .mes {
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .informacion {
+            flex: 1;
+        }
+
+        .informacion h2 {
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .informacion p {
+            color: #666;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .lugar {
+            font-weight: bold;
+        }
+
+
+        /* SIN EVENTOS */
+
+        .sin-eventos {
+            background: white;
+            padding: 50px 30px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 3px 12px #ddd;
+        }
+
+        .sin-eventos .icono {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .sin-eventos h2 {
+            margin-bottom: 10px;
+        }
+
+        .sin-eventos p {
+            color: #777;
+        }
+
+
+        /* BOTÓN */
+
+        .volver {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 13px 22px;
+            background: #111;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .volver:hover {
+            background: #ff6b00;
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 600px) {
+
+            .barra {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .titulo h1 {
+                font-size: 27px;
+            }
+
+            .evento {
+                align-items: flex-start;
+                padding: 20px;
+            }
+
+            .fecha {
+                min-width: 70px;
+                height: 70px;
+            }
+
+            .fecha .dia {
+                font-size: 24px;
+            }
+
+            .informacion h2 {
+                font-size: 18px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ENCABEZADO -->
+
+    <header>
+
+        <div class="barra">
+
+            <div class="logo">
+                ClubApp
+            </div>
+
+            <div class="titulo-header">
+                📅 Calendario
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTENIDO -->
+
+    <main>
+
+
+        <section class="titulo">
+
+            <h1>
+                Calendario
+            </h1>
+
+            <p>
+                Consultá los próximos eventos y actividades del club.
+            </p>
+
+        </section>
+
+
+        {% if eventos %}
+
+            <section class="eventos">
+
+                {% for evento in eventos %}
+
+                    <article class="evento">
+
+
+                        <div class="fecha">
+
+                            <div class="dia">
+                                {{ evento.fecha|date:"d" }}
+                            </div>
+
+                            <div class="mes">
+                                {{ evento.fecha|date:"M" }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="informacion">
+
+                            <h2>
+                                {{ evento.titulo }}
+                            </h2>
+
+                            <p>
+                                📝 {{ evento.descripcion }}
+                            </p>
+
+                            <p>
+                                🕐 {{ evento.hora|time:"H:i" }} hs
+                            </p>
+
+                            <p class="lugar">
+                                📍 {{ evento.lugar }}
+                            </p>
+
+                        </div>
+
+
+                    </article>
+
+                {% endfor %}
+
+            </section>
+
+
+        {% else %}
+
+            <section class="sin-eventos">
+
+                <div class="icono">
+                    📅
+                </div>
+
+                <h2>
+                    No hay eventos próximos
+                </h2>
+
+                <p>
+                    Cuando el club agregue actividades,
+                    aparecerán acá.
+                </p>
+
+            </section>
+
+        {% endif %}
+
+
+        <a
+            href="/jugador/"
+            class="volver"
+        >
+            ← Volver al inicio
+        </a>
+
+
+    </main>
+
+
+</body>
+
+</html>
